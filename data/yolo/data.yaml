@@ -1,0 +1,6 @@
+path: O:/Desktop/projects/SurfaceDefectDetection/data/yolo
+train: train/images
+val: test/images
+
+nc: 6
+names: ["crazing", "inclusion", "patches", "pitted_surface", "rolled-in_scale", "scratches"]

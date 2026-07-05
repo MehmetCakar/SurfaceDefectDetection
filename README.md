@@ -32,9 +32,11 @@ Generated HTML inspection report:
 
 ## Architecture
 
-- **Model:** ResNet18 (ImageNet pretrained), final layer replaced with 6 classes
-- **Training:** transfer learning, Adam, cross-entropy, ~15 epochs
-- **App:** Streamlit — upload, predict, explain, HTML report
+- **Classification:** ResNet18 (ImageNet pretrained), final layer replaced
+  with 6 classes — transfer learning, Adam, cross-entropy
+- **Detection:** YOLOv8-nano fine-tuned on NEU-DET bounding-box annotations,
+  localizes defects with boxes and per-defect confidence
+- **App:** Streamlit — upload, classify or detect, explain, HTML report
 
 ## Setup
 
@@ -57,6 +59,8 @@ python model/prepare_data.py
 
 ## Training
 
+Classification (ResNet18):
+
 ```bash
 python model/train.py --epochs 15
 ```
@@ -64,6 +68,17 @@ python model/train.py --epochs 15
 The best checkpoint (by validation accuracy) is saved to
 `model/saved_models/resnet18_neu.pt`, plus a `.metrics.json` with the
 test-set classification report.
+
+Detection (YOLOv8n) — expects the YOLO-format NEU-DET under `data/yolo/`
+(images + labels + `data.yaml`):
+
+```bash
+python model/train_yolo.py --epochs 40
+```
+
+The best weights are saved to
+`model/saved_models/yolov8n_neu/weights/best.pt`; once present, the app
+enables the "Defect Detection (YOLO)" mode.
 
 ## Running the app
 

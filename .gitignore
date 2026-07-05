@@ -1,8 +1,11 @@
 # Data & models (large files, not versioned)
 data/raw/
 data/processed/
+data/yolo/*
+!data/yolo/data.yaml
 model/saved_models/*.pt
 model/saved_models/*.pth
+model/saved_models/yolov8n_neu/
 
 # Python
 __pycache__/
@@ -16,6 +19,7 @@ venv/
 # Reports (generated)
 reports/*.html
 reports/*.pdf
+reports/analysis_log.csv
 !reports/sample_report.pdf
 
 # OS / IDE
@@ -23,3 +27,4 @@ reports/*.pdf
 Thumbs.db
 .vscode/
 .idea/
+yolov8n.pt

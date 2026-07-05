@@ -1,4 +1,31 @@
-"""Defect descriptions and recommendation logic for the inspection app."""
+"""Defect descriptions, recommendation logic and analysis logging."""
+
+import csv
+from datetime import datetime
+from pathlib import Path
+
+LOG_PATH = Path(__file__).resolve().parent.parent / "reports" / "analysis_log.csv"
+LOG_FIELDS = ["timestamp", "filename", "mode", "label", "confidence", "verdict"]
+
+
+def log_analysis(filename: str, mode: str, label: str, confidence: float, verdict: str) -> None:
+    """Append one analysis result to the CSV log used by the dashboard."""
+    LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    new_file = not LOG_PATH.exists()
+    with LOG_PATH.open("a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=LOG_FIELDS)
+        if new_file:
+            writer.writeheader()
+        writer.writerow(
+            {
+                "timestamp": datetime.now().isoformat(timespec="seconds"),
+                "filename": filename,
+                "mode": mode,
+                "label": label,
+                "confidence": f"{confidence:.4f}",
+                "verdict": verdict,
+            }
+        )
 
 DEFECT_INFO = {
     "crazing": {

@@ -9,3 +9,4 @@ matplotlib>=3.8
 Pillow>=10.3
 tqdm>=4.66
 kaggle>=1.6
+ultralytics>=8.2
