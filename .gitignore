@@ -1,0 +1,25 @@
+# Data & models (large files, not versioned)
+data/raw/
+data/processed/
+model/saved_models/*.pt
+model/saved_models/*.pth
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Reports (generated)
+reports/*.html
+reports/*.pdf
+!reports/sample_report.pdf
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
