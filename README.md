@@ -20,6 +20,16 @@ Six classes from the [NEU Surface Defect Database](https://www.kaggle.com/datase
 | Rolled-in Scale | Oxide scale pressed in during hot rolling |
 | Scratches | Linear mechanical surface damage |
 
+## Screenshots
+
+Analysis result with prediction, confidence and recommendation:
+
+![Analysis result](docs/screenshot.png)
+
+Generated HTML inspection report:
+
+![Inspection report](docs/screenshot2.png)
+
 ## Architecture
 
 - **Model:** ResNet18 (ImageNet pretrained), final layer replaced with 6 classes
