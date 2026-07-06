@@ -38,6 +38,31 @@ Generated HTML inspection report:
   localizes defects with boxes and per-defect confidence
 - **App:** Streamlit — upload, classify or detect, explain, HTML report
 
+## Results
+
+**Classification (ResNet18, 15% held-out test set):** 100% accuracy —
+all 270 test images correct across all six classes. NEU-CLS is a clean,
+studio-condition benchmark; published transfer-learning results are
+similarly in the 99–100% range. Real production-line imagery would be
+substantially harder.
+
+**Detection (YOLOv8n, 256px, 40 epochs, NEU-DET test split):**
+
+| Class | mAP50 |
+|---|---|
+| patches | 0.95 |
+| scratches | 0.86 |
+| inclusion | 0.85 |
+| pitted_surface | 0.79 |
+| rolled-in_scale | 0.59 |
+| crazing | 0.46 |
+| **all** | **0.75** |
+
+mAP50-95: 0.42. Diffuse, texture-like defects (crazing, rolled-in scale)
+are hard to box tightly — a known property of this benchmark — while
+localized defects (patches, inclusions, scratches) detect reliably.
+Inference runs at ~18 ms/image on CPU.
+
 ## Setup
 
 ```bash
@@ -89,7 +114,11 @@ streamlit run app/streamlit_app.py
 ## CLI prediction
 
 ```bash
+# classification: class + confidence + top-3
 python model/predict.py data/sample_images/scratches_1.jpg
+
+# detection: boxes + per-defect confidence, optionally save annotated image
+python model/predict_yolo.py data/sample_images/scratches_1.jpg --out annotated.jpg
 ```
 
 ## Project structure
