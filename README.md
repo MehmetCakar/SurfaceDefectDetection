@@ -30,6 +30,10 @@ Generated HTML inspection report:
 
 ![Inspection report](docs/screenshot2.png)
 
+YOLO defect localization (scratch detected at 81% confidence):
+
+![Detection example](docs/detection_example.jpg)
+
 ## Architecture
 
 - **Classification:** ResNet18 (ImageNet pretrained), final layer replaced
@@ -121,6 +125,16 @@ python model/predict.py data/sample_images/scratches_1.jpg
 python model/predict_yolo.py data/sample_images/scratches_1.jpg --out annotated.jpg
 ```
 
+## Docker
+
+```bash
+docker build -t defect-analyzer .
+docker run -p 8501:8501 defect-analyzer
+```
+
+Then open http://localhost:8501. The image bundles both trained models,
+so classification and detection work out of the box.
+
 ## Project structure
 
 ```
@@ -137,9 +151,8 @@ python model/predict_yolo.py data/sample_images/scratches_1.jpg --out annotated.
 
 ## Future improvements
 
-- YOLO-based defect localization (NEU-DET ships with bounding-box
-  annotations, so the same dataset covers detection)
 - Real-time camera inspection
-- Dashboard for defect trends across analyzed batches
 - FastAPI backend + PostgreSQL storage
-- PDF reports, role-based login, Docker deployment
+- PDF reports and role-based login
+- Improved crazing/rolled-in-scale detection (larger model, higher
+  input resolution, or segmentation instead of boxes)

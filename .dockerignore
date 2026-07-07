@@ -1,0 +1,13 @@
+.git
+.venv
+__pycache__
+data/raw
+data/processed
+data/yolo
+notebooks
+docs
+reports
+runs
+yolov8n.pt
+model/saved_models/yolov8n_neu/weights/last.pt
+*.tar.gz

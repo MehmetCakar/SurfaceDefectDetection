@@ -29,3 +29,7 @@ Thumbs.db
 .idea/
 yolov8n.pt
 runs/
+
+# generated detection artifacts
+reports/*.jpg
+reports/*.png
